@@ -1,71 +1,89 @@
 <html lang="en">
 
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <title>Daily Planner</title>
-<!-- Google fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900|Ubuntu" rel="stylesheet">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Daily Planner</title>
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:400,900|Ubuntu" rel="stylesheet">
     <!-- Bootstrap Style Sheets -->
-        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
-            integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-            <!-- CSS Stylesheet -->
-        <link rel="stylesheet" href="./assets/css/style.css">
-        <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <!-- CSS Stylesheet -->
+    <link rel="stylesheet" href="./assets/css/style.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.1/css/all.css"
+        integrity="sha384-50oBUHEmvpQ+1lW4y57PTFmhCaXp0ML5d60M1M7uH2+nqUivzIebhndOJK28anvf" crossorigin="anonymous" />
     <script src="https://kit.fontawesome.com/f6c4aefac0.js" crossorigin="anonymous"></script>
-    </head>
+</head>
 
 <!-- BODY START -->
 <body class="page-template">
-    <header id="main-header">
-        <div class="container clearfix">
-            <!-- Main Navbar -->
-            <nav class="navbar navbar-expand-lg navbar-light" id="main-nav">
-                <div class="collapse navbar-collapse">
-                    <!-- Navbar brand -->
-                    <a href="./index.html">
-                        <h1 class="navbar-brand">Javascript Quiz</h1>
-                    </a>
-                    <!-- Links -->
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                            <a id="timer" class="stop-watch">10:00</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-item" id="view-score">Highscores!</a>
-                        </li>
-                    </ul>
-                </div>
-            </nav><!-- #main-nav -->
-        </div><!-- .container -->
+    <header>
+        <!-- Main Navbar -->
+        <a href="./index.html">
+            <div class="jumbotron">
+                <h1 class="display-3">Work Day Scheduler</h1>
+                <p class="lead">A simple calendar app for scheduling your work day</p>
+                <p id="currentDay" class="lead"></p>
+            </div>
+        </a>
     </header><!-- #main-header -->
+    <!-- STARTER CODE HEADER -->-
+    
+    <!-- STARTER CODE HEADER END -->
     <!-- Main Section Start -->
-    <main  class="">
-        <div id="highscores" class="hide">
-            <section id="" class="quiz-container highscore">
-                <ul id="top-ten">
-    
-                </ul>
-    
-            </section>
+    <div class="container">
+        <div class="row">
+            <div id="9am" class="col-sm-1 border-top">9AM</div>
+            <div id="task9" class="col-sm-10 bg-secondary text-light"></div>
+            <button id="btn-save" class="col-sm-1 bg-info"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
         </div>
-        <section id="main-container" class="quiz-container">
-            <div id="question-container" class="hide">
-                <div id="question">Question 1</div>
-                <div id="answer-buttons" class="btn-grid">
-                    <button class="btn">Answer 1</button>
-                    <button class="btn">Answer 2</button>
-                    <button class="btn">Answer 3</button>
-                    <button class="btn">Answer 4</button>
-                </div>
-            </div>
-            <div class="controls">
-                <button id="start-btn" class="start-btn btn">Start</button>
-                <button id="next-btn" class="next-btn btn hide">Next</button>
-            </div>
-        </section>
-    </main>
-    
+        <div class="row">
+            <div id="10am" class="col-sm-1 border-top">10AM</div>
+            <div id="task10" class="col-sm-10 bg-secondary text-light"></div>
+            <button id="btn-save" class="col-sm-1 bg-info"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+        </div>
+        <div class="row">
+            <div id="11am" class="col-sm-1 border-top">11AM</div>
+            <div id="task11" class="col-sm-10 bg-secondary text-light"></div>
+            <button id="btn-save" class="col-sm-1 bg-info"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+        </div>
+        <div class="row">
+            <div id="12pm" class="col-sm-1 border-top">12PM</div>
+            <div id="task12" class="col-sm-10 bg-secondary text-light"></div>
+            <button id="btn-save" class="col-sm-1 bg-info"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+        </div>
+        <div class="row">
+            <div id="1pm" class="col-sm-1 border-top">1PM</div>
+            <div id="task1" class="col-sm-10 bg-secondary text-light"></div>
+            <button id="btn-save" class="col-sm-1 bg-info"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+        </div>
+        <div class="row">
+            <div id="2pm" class="col-sm-1 border-top">2PM</div>
+            <div id="task2" class="col-sm-10 bg-secondary text-light"></div>
+            <button id="btn-save" class="col-sm-1 bg-info"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+        </div>
+        <div class="row">
+            <div id="3pm" class="col-sm-1 border-top">3PM</div>
+            <div id="task3" class="col-sm-10 bg-secondary text-light"></div>
+            <button id="btn-save" class="col-sm-1 bg-info"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+        </div>
+        <div class="row">
+            <div id="4pm" class="col-sm-1 border-top">4PM</div>
+            <div id="task4" class="col-sm-10 bg-secondary text-light"></div>
+            <button id="btn-save" class="col-sm-1 bg-info"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+        </div>
+        <div class="row">
+            <div id="5pm" class="col-sm-1 border-top">5PM</div>
+            <div id="task5" class="col-sm-10 bg-secondary text-light"></div>
+            <button id="btn-save" class="col-sm-1 bg-info"><i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+        </div>
+
+        
+    </div>
+
     <!-- Main Section End -->
     <!-- Footer -->
     <footer id="main-footer">
@@ -97,17 +115,23 @@
             </div>
         </div><!-- #footer-bottom -->
     </footer><!-- #main-footer -->
+    <!-- Jquery -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.26.0/moment-with-locales.min.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
-        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
+    <!-- Moment.js -->
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
+    <!-- BootStrap.js -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
     </script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
         integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous">
     </script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
-        integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"
+        integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous">
     </script>
+    <!-- Javascript -->
     <script src="./assets/js/script.js"></script>
 </body>
 
