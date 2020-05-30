@@ -10,4 +10,4 @@ Work Day Scheduler created by Jeremy C. Collins. This is my week five challenge 
 * Email: **garves44@gmail.com**
 * LinkedIn:[https://www.linkedin.com/in/jeremy-collins-209545194/](https://www.linkedin.com/in/jeremy-collins-209545194/) 
 
-![](./assets/images/wdp.png)
+![](./assets/images/wdp.PNG)

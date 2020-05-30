@@ -110,7 +110,6 @@ $(".hourly-task").on("click", function () {
     textInput.trigger("focus");
 });
 $(".hourly-task").on("blur", "textarea", function () {
-
     var textInput = $(this).val().trim();
     $(this).closest(".hourly-task").text(textInput);
     saveSchedule();
