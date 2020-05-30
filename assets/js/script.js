@@ -1,164 +1,118 @@
-//Moment Variables
+/*********************************************************
+ * Schedule JS
+ * @package w5c-daily-planner
+ * @author Jeremy C Collins
+ * @version FINAL
+ * @license none (public domain)
+ * 
+ * ===============[ TABLE OF CONTENTS ]===================
+ * 0. Globals
+ * 1. Functions
+ *   1.1 saveSchedule()
+ *   1.2 loadSchedule()
+ *   1.3 Time function
+ * 
+ * 2. Document Ready
+ *   2.1 Render Schedule on ready
+ *   2.2 Add click listeners (add, edit, delete, reset)
+ * 
+ *********************************************************/
+
+/* ===============[ 0. GLOBALS ]=========================*/
 const m = moment();
+var scheduleArr = (localStorage.getItem("schedule") === null) ? [] : JSON.parse(localStorage.getItem("schedule"));
 
+/* ===============[ 1. Functions ]=======================*/
+var auditTime = function (timeEl, timeInt) {
+    timeEl.removeClass("bg-secondary bg-success bg-danger");
+    momentInt = parseInt(m.format("HH"));
+    if (momentInt > timeInt) {
+        timeEl.addClass("bg-secondary");
+    } else if (momentInt === timeInt) {
+        timeEl.addClass("bg-danger");
+    } else if (momentInt < timeInt) {
+        timeEl.addClass("bg-success");
+    };
+};
 
-// Moment Functions
-$("#currentDay").text(m.format("dddd, MMMM Do"));
+/**
+ * 1.1 saveSchedule()
+ */
+var saveSchedule = function () {
+    var tempScheduleArr = [];
 
+    $("#schedule .row").each(function () {
+        var this_row = $(this);
 
+        var row_time = this_row.data("time");
+        var row_taskEl = this_row.find("div:nth-child(2)");
+        var row_task_text = row_taskEl.text();
 
+        tempScheduleArr.push({
+            [row_time]: row_task_text
+        });
+        auditTime(row_taskEl, row_time);
+    });
 
-
-
-
-var loadTasks = function () {
-    tasks = JSON.parse(localStorage.getItem("tasks"));
+    localStorage.setItem("schedule", JSON.stringify(tempScheduleArr));
+};
+/**
+ * 1.2 loadSchedule()
+ */
+var loadSchedule = function () {
 
     // if nothing in localStorage, create a new object to track all task status arrays
-    if (!tasks) {
-        tasks = {
-        };
+    if (scheduleArr.length === 0) {
+        return;
     };
-
     // loop over object properties
-    $.each(tasks, function (list, arr) {
-        console.log(list, arr);
-        // then loop over sub-array
-        arr.forEach(function (task) {
-            createTask(task.text, task.date, list);
-        });
+    $.each(scheduleArr, function (index, objectData) {
+        var hour = Object.keys(objectData)[0];
+        var task = Object.values(objectData)[0];
+        var targetRow = $("#schedule").find(`[data-time='${hour}']`);
+        targetRow.find(".hourly-task").text(task);
+
     });
 };
+/**
+ * 1.3 Time function
+ */
+$("#currentDay").text(m.format("dddd, MMMM Do"));
 
+/**===============[ Document Ready ]==================== 
+ * NOTE: $(function(){ === $(document).ready(function() {
+ * it's the shorthand version of document ready. 
+ *********************************************************/
 
+// 2.1 Render Schedule on ready
+$(function () {
+    loadSchedule();
 
+    $("#schedule .row").each(function () {
+        var this_row = $(this);
 
-var saveTasks = function () {
-    localStorage.setItem("tasks", JSON.stringify(tasks));
-};
-
-
-
-
-
-
-var tasksArr = [$("#task9"), $("#task10"), $("#task11"), $("#task12"), $("#task1"), $("#task2"), $("#task3"), $("#task4"), $("#task5")];
-
-var auditTime = function (timeEl, time) {
-    $(timeEl).removeClass("bg-secondary bg-success bg-danger");
-    if (m.isAfter(time)) {
-        $(timeEl).addClass("bg-secondary");
-    } else if (Math.abs(m.diff(time, "hours")) = 1) {
-        $(timeEl).addClass("bg-success");
-    } else if (Math.abs(m.diff(time, "hours")) <= 2) {
-        $(timeEl).addClass("bg-danger");
-    };
-};
-
-
-var currentTime = 0;
-tasksArr.forEach(tasksArr => {
-auditTime(tasksArr, currentTime + 9)
-currentTime++;
-
+        var row_time = this_row.data("time");
+        var row_task = this_row.find("div:nth-child(2)");
+        var row_button = this_row.find("div:nth-child(3)");
+        auditTime(row_task, row_time);
+    });
 });
+// 2.2 Add click listeners (add, edit, reset, delete)
 
-console.log(currentTime);
-
-
-
-
-
-
-
-$(".list-group").on("click", "p", function()  {
-    var text = $(this).text().trim();
-    var textInput = $("<textarea>").addClass("form-control").val(text);
-    $(this).replaceWith(textInput);
+$(".hourly-task").on("click", function () {
+    var childrenCount = $(this).find("textarea").length;
+    if (childrenCount > 0) {
+        $(this).empty();
+    }
+    var displayText = $(this).text().trim();
+    var textInput = $("<textarea>").val(displayText);
+    $(this).empty().append(textInput);
     textInput.trigger("focus");
-    console.log(text);
-  });
-  $(".list-group").on("blur", "textarea", function() {
-    var text = $(this).val().trim();
-    var status = $(this).closest(".list-group").attr("id").replace("list-", "");
-    var index = $(this).closest(".list-group-item").index();
-  
-    tasks[status][index].text = text;
-  
-    saveTasks();
-  
-    var taskP = $("<p>").addClass("m-1").text(text);
-  
-    $(this).replaceWith(taskP);
-  });
-  $(".list-group").on("click", "span", function() {
-    var date = $(this).text().trim();
-    var dateInput = $("<input>").attr("type", "text").addClass("form-control").val(date);
-    $(this).replaceWith(dateInput);
-  
-    dateInput.datepicker({
-      minDate: 1,
-      onClose: function() {
-        $(this).trigger("change");
-      }
-    });
-  
-    dateInput.trigger("focus");
-  });
-  $(".list-group").on("change", "input[type='text]", function() {
-    var date = $(this).val()
-    ;
-    var status = $(this).closest(".list-group").attr("id").replace("list-", "");
-    var index = $(this).closest(".list-group-item").index();
-  
-    tasks[status][index].date = date;
-    saveTasks();
-  
-    var taskSpan = $("<span>").addClass("badge badge-primary badge-pill").text(date);
-    $(this).replaceWith(taskSpan);
-  
-    auditTask($(taskSpan).closest(".list-group-item"));
-  });
-  
-  
-  $(".card .list-group").sortable({
-    connectWith: $(".card .list-group"),
-    scroll: false,
-    tolerance: "pointer",
-    helper: "clone",
-    activate: function(event) {
-      $(this).addClass("dropover");
-      $(".bottom-trash").addClass("bottom-trash-drag");
-    },
-    deactivate: function(event){
-      $(this).removeClass("dropover");
-      $(".bottom-trash").removeClass("bottom-trash-drag");
-    },
-    over: function(event) {
-      $(event.target).addClass("dropover-active");
-      $(".bottom-trash").addClass("bottom-trash-active");
-    },
-    out: function(event) {
-      $(event.target).removeClass("dropover-active");
-      $(".bottom-trash").removeClass("bottom-trash-active");
-    },
-    update: function(event) {
-      var tempArr = [];
-  
-      $(this).children().each(function() {
-        var text = $(this)
-        .find("p")
-        .text()
-        .trim();
-  
-        var date = $(this)
-        .find("span")
-        .text()
-        .trim();
-  
-        tempArr.push({
-          text: text,
-          date: date
-        });
-      });
-  
+});
+$(".hourly-task").on("blur", "textarea", function () {
+
+    var textInput = $(this).val().trim();
+    $(this).closest(".hourly-task").text(textInput);
+    saveSchedule();
+});
+$(".save-btn").on("click", saveSchedule);
